@@ -1,0 +1,30 @@
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+type Item {
+  createdAt: DateTime
+  description: String
+  id: ID!
+  imageUrl: String
+  title: String!
+  updatedAt: DateTime
+  url: String
+}
+
+type Mutation {
+  createItem(description: String, imageUrl: String, title: String!, url: String): Item
+  deleteItem(id: ID!): Item
+  updateItem(description: String, id: ID!, imageUrl: String, title: String, url: String): Item
+}
+
+type Query {
+  getItems(sortBy: SortOrder): [Item]
+  getOneItem(id: String!): Item
+}
+
+enum SortOrder {
+  asc
+  desc
+}
